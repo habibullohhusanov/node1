@@ -5,12 +5,12 @@ const path = require("path");
 //     if (e) {
 //         throw new Error(e);
 //     }
-//     console.log("Created folder");
+//     conclssole.log("Created folder");
 // });
 fs.writeFile(path.join(__dirname, "templates", "txt.txt"), "Pashol ti", e => {
     if (e) throw new Error(e);
     console.log("Created");
-    fs.appendFile(path.join(__dirname, "templates", "txt.txt"), " chort", e => {
+    fs.appendFile(path.join(__dirname, "templates", "txgitgit t.txt"), " chort", e => {
         if (e) throw new Error(e);
         console.log("Changed");
     })
