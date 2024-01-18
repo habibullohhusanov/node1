@@ -14,3 +14,8 @@ console.log(path.parse(__dirname));
 
 console.log(path.join(__dirname, "templates", "index.js"));
 console.log(path.resolve(__dirname, "./templates", "/index.js"));
+
+
+const siteURL = "http://127.0.0.1:8000/users?id=5";
+const url = new URL(siteURL);
+console.log(url);
