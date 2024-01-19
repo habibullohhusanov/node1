@@ -1,5 +1,18 @@
-const dotenv = require("dotenv");
-dotenv.config();
+const PORT = process.env.PORT || 5000;
+const Router = require("./Framework/Route");
+const Applications = require("./framework/Applications");
 
-console.log(process.env.PORT);
-console.log(process.env.NODE_ENV);
+const app = new Applications();
+
+const router = new Router();
+
+router.get('/users', (req, res) => {
+    res.end(`You are in ${req.url}`);
+});
+router.get('/posts', (req, res) => {
+    res.end(`You are in ${req.url}`);
+});
+
+app.addRoute(router);
+
+app.listen(PORT, () => console.log(`http://localhost:${PORT}/users`));
