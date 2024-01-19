@@ -1,18 +1,10 @@
 const PORT = process.env.PORT || 5000;
-const Router = require("./Framework/Route");
+const userRouter = require("./src/user-router");
 const Applications = require("./framework/Applications");
+const jsonParse = require("./framework/jsonParse");
 
 const app = new Applications();
-
-const router = new Router();
-
-router.get('/users', (req, res) => {
-    res.end(`You are in ${req.url}`);
-});
-router.get('/posts', (req, res) => {
-    res.end(`You are in ${req.url}`);
-});
-
-app.addRoute(router);
+app.use(jsonParse);
+app.addRoute(userRouter);
 
 app.listen(PORT, () => console.log(`http://localhost:${PORT}/users`));
