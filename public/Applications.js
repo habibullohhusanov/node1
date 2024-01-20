@@ -17,19 +17,29 @@ module.exports = class Applications {
             const endpoint = router.endpoints[path];
             Object.keys(endpoint).forEach(method => {
                 this.emitter.on(this._GetRouteMask(path, method), (req, res) => {
-                    const handler = endpoint[method];
-                    this.middlwares.forEach(middlware => middlware(req, res));
-                    handler(req, res);
+                        const handler = endpoint[method];
+                        handler(req, res);
                 })
             });
         })
     }
     _CreateServer() {
         return http.createServer((req, res) => {
-            const emitted = this.emitter.emit(this._GetRouteMask(req.url, req.method), req, res);
-            if (!emitted) {
-                res.end(`${req.url} Not found!`)
-            }
+            let body = "";
+            req.on("data", (chunk) => {
+                body += chunk;
+            });
+            req.on("end", () => {
+                if (body) {
+                    req.body = JSON.parse(body);
+                }
+                this.middlwares.forEach(middlware => middlware(req, res));
+                const emitted = this.emitter.emit(this._GetRouteMask(req.pathname, req.method), req, res);
+                console.log(req.pathname);
+                if (!emitted) {
+                    res.end(`${req.url} Not found!`)
+                }
+            });
         });
     }
     _GetRouteMask(path, method) {

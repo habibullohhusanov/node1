@@ -3,6 +3,7 @@ module.exports = (req, res) => {
         "Content-type": "application/json",
     });
     res.send = (data) => {
+        console.log(data);
         res.end(JSON.stringify(data));
     };
 }
