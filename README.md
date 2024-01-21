@@ -10,9 +10,13 @@ npm i
 
 ### Enter the terminal
 ```
+npm start
+```
+### If are you going to change and use enter the terminal
+```
 npm i --save-dev nodemon
 
-npm start
+npm run dev
 ```
 
 **Open Postman or a browser and send a get request to http://127.0.0.1:5000/users**
